@@ -3,6 +3,8 @@ package com.joaodcpjunior.pizzas.controllers;
 import com.joaodcpjunior.pizzas.dtos.PizzaDTO;
 import com.joaodcpjunior.pizzas.entities.Pizza;
 import com.joaodcpjunior.pizzas.services.PizzaService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,9 +33,9 @@ public class PizzaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PizzaDTO>> findAll(){
-        List<Pizza> pizzaList = pizzaService.findAll();
-        List<PizzaDTO> pizzaDTOList = pizzaList.stream().map(x -> new PizzaDTO(x)).collect(Collectors.toList());
+    public ResponseEntity<?> findAll(Pageable pageable){
+        Page<Pizza> pizzaList = pizzaService.findAll(pageable);
+        Page<PizzaDTO> pizzaDTOList = pizzaList.map(pizza -> new PizzaDTO(pizza));
         return ResponseEntity.ok().body(pizzaDTOList);
     }
 

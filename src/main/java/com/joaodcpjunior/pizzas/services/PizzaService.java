@@ -4,9 +4,9 @@ import com.joaodcpjunior.pizzas.dtos.PizzaDTO;
 import com.joaodcpjunior.pizzas.entities.Pizza;
 import com.joaodcpjunior.pizzas.repositories.PizzaRepository;
 import com.joaodcpjunior.pizzas.services.exceptions.ObjectNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PizzaService {
@@ -21,8 +21,8 @@ public class PizzaService {
         pizzaRepository.save(pizza);
     }
 
-    public List<Pizza> findAll() {
-        return pizzaRepository.findAll();
+    public Page<Pizza> findAll(Pageable pageable) {
+        return pizzaRepository.findAll(pageable);
     }
 
     public Pizza findById(Integer id) {
