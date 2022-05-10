@@ -1,5 +1,6 @@
 package com.joaodcpjunior.pizzas.services;
 
+import com.joaodcpjunior.pizzas.dtos.PizzaDTO;
 import com.joaodcpjunior.pizzas.entities.Pizza;
 import com.joaodcpjunior.pizzas.repositories.PizzaRepository;
 import com.joaodcpjunior.pizzas.services.exceptions.ObjectNotFoundException;
@@ -47,5 +48,9 @@ public class PizzaService {
     public void delete(Integer id) {
         findById(id);
         pizzaRepository.deleteById(id);
+    }
+
+    public Pizza fromDto(PizzaDTO pizzaDto) {
+        return new Pizza(pizzaDto.getId(), pizzaDto.getName(), pizzaDto.getDescription(), pizzaDto.getPrice());
     }
 }
