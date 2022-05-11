@@ -4,6 +4,7 @@ import com.joaodcpjunior.pizzas.dtos.PizzaDTO;
 import com.joaodcpjunior.pizzas.entities.Pizza;
 import com.joaodcpjunior.pizzas.repositories.PizzaRepository;
 import com.joaodcpjunior.pizzas.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,11 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PizzaService {
 
-    private final PizzaRepository pizzaRepository;
-
-    public PizzaService(PizzaRepository pizzaRepository) {
-        this.pizzaRepository = pizzaRepository;
-    }
+    @Autowired
+    private PizzaRepository pizzaRepository;
 
     public void registerPizza(Pizza pizza) {
         pizzaRepository.save(pizza);

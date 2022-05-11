@@ -3,6 +3,7 @@ package com.joaodcpjunior.pizzas.controllers;
 import com.joaodcpjunior.pizzas.dtos.PizzaDTO;
 import com.joaodcpjunior.pizzas.entities.Pizza;
 import com.joaodcpjunior.pizzas.services.PizzaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,8 @@ import java.util.stream.Collectors;
 @RequestMapping("api/v1/pizzas")
 public class PizzaController {
 
-
-    private final PizzaService pizzaService;
-
-    public PizzaController(PizzaService pizzaService) {
-        this.pizzaService = pizzaService;
-    }
+    @Autowired
+    private PizzaService pizzaService;
 
     @PostMapping
     public ResponseEntity<Void> registerPizza(@RequestBody PizzaDTO pizzaDto) {
@@ -46,7 +43,7 @@ public class PizzaController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> updateUser(@RequestBody PizzaDTO pizzaDTO, @PathVariable Integer id) {
+    public ResponseEntity<Void> update(@RequestBody PizzaDTO pizzaDTO, @PathVariable Integer id) {
         Pizza pizzaObj = pizzaService.fromDto(pizzaDTO);
         pizzaObj.setId(id);
         pizzaService.update(pizzaObj, id);
