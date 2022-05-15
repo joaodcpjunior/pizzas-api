@@ -46,7 +46,7 @@ public class PizzaController {
                     @ApiResponse(responseCode = "200", description = "Ok"),
             }
     )
-    public ResponseEntity<?> findAll(@RequestParam(required = false) Pageable pageable) {
+    public ResponseEntity<?> findAll(Pageable pageable) {
         Page<Pizza> pizzaList = pizzaService.findAll(pageable);
         Page<PizzaDTO> pizzaDTOList = pizzaList.map(pizza -> new PizzaDTO(pizza));
         return ResponseEntity.ok().body(pizzaDTOList);
